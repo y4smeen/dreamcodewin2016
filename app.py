@@ -5,7 +5,12 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home(): 
-    return render_template("home.html")
+    if ('id' not in session):
+        session['id'] = -1
+    if session['id'] == -1:
+        return render_template("home.html")
+    else:
+        return render_template("study.html")
 
 @app.route("/create", methods=['GET', 'POST'])
 def create():
@@ -38,6 +43,21 @@ def login():
             return render_template("login.html", error=True)
     else:
         return render_template("login.html")
+        
+@app.route("/search", methods=['GET', 'POST']
+def search():
+    if session['id'] == -1:
+        return redirect(url_for("home"))
+    if request.method == 'POST':
+        return render_template("results.html")
+    else:
+        return render_template("search.html")
+        
+@app.route("/logout")
+def logout():
+    #resets the session to none
+    session['id'] = -1
+    return redirect(url_for("home"))
         
 if __name__ == "__main__":
     app.debug = True

@@ -4,11 +4,11 @@
 
 {% block contents %}
 
-<body>
+<body class="bg2">
 <!-- need to change this to just the home symbol -->
-	<button type = "button" class = "btn btn-info btn-lg" id="gohome">
+	<button type = "button" class = "btn btn-button-home btn-lg">
   	  <a href="/home">
-	    <span class = "glyphicon glyphicon-home" style="color:white"></span> 
+	    <span class = "glyphicon glyphicon-home" style="color:black"></span> 
 	  </a>
 	</button>
 	
@@ -18,7 +18,7 @@
       <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 	<form role="form" method="POST">
 	  <div id="font2">
-	    <h1 class="center2">Parent Login</h1>
+	    <h1 class="center2">User Login</h1>
 	  </div>
 	  <hr>
 	  {% if error %}

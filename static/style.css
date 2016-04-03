@@ -1,146 +1,68 @@
 /* CSS Stylesheet */
 
-body.home {
-    background-color: black;
-    /*background: url(imgs/apple2.jpg) no-repeat center center fixed;*/ 
-    -webkit-background-size: cover;
+.home {
+	background-color: black;
+	background: url(photo2.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
-/*
-body {
-    background-color: blue;
-}
-*/
-@font-face {
-    font-family: chalkboard;
-    src: url(rayando.ttf);
-    font-weight: bold;
-}
 
-@font-face {
-    font-family: chalktwo;
-    src: url(DrawingGuides.ttf);
-    font-weight: bold;
-}
-
-#title {
-    position: fixed;
-    top: 50px;
-    left: 500px;
-    font-family: chalkboard;
-    
-}
-
-#homebuttons {
-    position: fixed;
-    top: 300px;
-    left: 750px;
-    font-family: chalkboard;
-    color: white;
+.bg2 {
+	background-color: black;
+	background: url(photo1.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .jumbotron{
-    background-color:transparent !important;
+    background-color: transparent; !important;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.btn-space {
-    margin-right: 10px;
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
 }
 
-.center {
-    text-align:center;
+.btn-button-home, .btn-button-home:link, .btn-button-home:visited {
+	background-color: transparent;
+	border-radius = 0;
+	color: #000000;
+	border: 3px solid #000000;
+}
+
+.btn-button-home:active, .btn-button-home:hover {
+	background-color: #000000;
+	color: #fff;
+}
+
+
+h1 {
+	font-family: 'Lobster', cursive;
+	
 }
 
 .center2 {
     text-align:center;
+    font-family: 'Lobster', cursive;
     font-size: 50px;
-    color: black;
-}
-
-#slight_right {
-    margin:auto;
-    /*position: absolute;*/
-    right: 0px;
-    width: 880px;
-}
-
-
-#font2 {
-    font-family: chalktwo;
     color: white;
 }
 
-#gohome {
-    position: fixed;
-    top: 30px;
-    left: 30px;
+h2 {
+	font-family: 'Lobster', cursive;
 }
 
-/* Test Page Code */
-
-table, th, td {
-    border: 1px solid #663300;
-    border-collapse: collapse;
-}
-
-
-th, td {
-    padding: 10px;
-    text-align: center;
-    
-}
-
-#error {
-    font-size: 20px;
-}
-
-#outer {
-    margin: 0 auto;
-    width: 1200px;
-}
-
-#inner {
-    border: 1px solid transparent;
-    display:block;
-    height: 300px;
-    width: 550px;
-    padding: 20px;
-    overflow-y:scroll;
-    overflow-x:scroll;
-    float: center;
-}
-
-#inner_row {
-    font-size: 20px;
-    border: 4px solid white;
-    height:10px;
-}
-
-td {
-    height: 400px;
-    width: 600px;
-    padding: 10px;
-    /*background: url(imgs/chalkboard9.png); */
-}
-
-#table2 {
-    border: 1px solid white;
-    border-collapse: collapse;
-}
-
-.tdth2 {
-    padding: 5px;
-    height: 50px;
-    width: 100px;
-}
-
-#black {
-    color:black;
-}
-
-
- .navbar-default {
-    background-color: transparent;
+#font1 {
+	font-family: 'Lobster', cursive;
 }
