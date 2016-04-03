@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %} User Login {% endblock %}
+
+{% block contents %}
+
+<body>
+<!-- need to change this to just the home symbol -->
+	<button type = "button" class = "btn btn-info btn-lg" id="gohome">
+  	  <a href="/home">
+	    <span class = "glyphicon glyphicon-home" style="color:white"></span> 
+	  </a>
+	</button>
+	
+  <br><br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+	<form role="form" method="POST">
+	  <div id="font2">
+	    <h1 class="center2">Parent Login</h1>
+	  </div>
+	  <hr>
+	  {% if error %}
+	  <div class="alert alert-danger">
+	    <p id="error">Either your username or password did not match.</p>
+	  </div>
+	  {% endif %}
+	  <div class="form-group">
+	    <input type="text" name="username" id="username" class="form-control input-lg" placeholder="Username" tabindex="1" required>
+	  </div>
+	  <div class="form-group">
+	    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="2" required>
+	  </div>
+	  
+	  <hr>
+	  <div class="row">
+	    <div class="col-xs-12 col-md-12">
+	      <input type="submit" value="Sign In" class="btn btn-success btn-block btn-lg" tabindex="7">  
+	    </div>
+	  </div>
+	</form>
+      </div>
+</body>
+
+{% endblock %}
