@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} User Signup {% endblock %}
+
+{% block contents %}
+<body class="bg2">
+
+<!-- need to change this to just the home symbol -->
+	<button type = "button" class = "btn btn-button-home btn-lg">
+
+  	  <a href="/home">
+	    <span class = "glyphicon glyphicon-home" style="color:black"></span> 
+	  </a>
+	</button>
+
+
+  <br><br><br>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+	<form role="form" method="POST">
+	  <div id="font2">
+	    <h1 class="center2">User Sign Up</h1>
+	  </div>
+	  <hr>
+	  {% if error %}
+	  <div class="alert alert-danger">
+	      <p id="error">{{message}}</p>
+	  </div>
+	  {% endif %}
+      <div class="form-group">
+        <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Full Name" tabindex="1" required>
+      </div>
+	  <div class="form-group">
+	    <input type="text" name="username" id="username" class="form-control input-lg" placeholder="Username" tabindex="3" required>
+	  </div>
+	  <div class="form-group">
+	    <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" required>
+	  </div>
+	  <div class="row">
+	    <div class="col-xs-12 col-sm-6 col-md-6">
+	      <div class="form-group">
+		<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" required>
+	      </div>
+	    </div>
+	    <div class="col-xs-12 col-sm-6 col-md-6">
+	      <div class="form-group">
+		<input type="password" name="repeat_password" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6" required>
+	      </div>
+	    </div>
+	  </div>
+	  
+	  <hr>
+	  <div class="row">
+	    <div class="col-xs-12 col-md-12"><input type="submit" value="Register" class="btn btn-success btn-block btn-lg" tabindex="7"></div>
+	  </div>
+	</form>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}
