@@ -7,6 +7,7 @@ app = Flask(__name__)
 def home(): 
     if ('id' not in session):
         session['id'] = -1
+    session['id'] = -1
     if session['id'] == -1:
         return render_template("home.html")
     else:
@@ -44,7 +45,7 @@ def login():
     else:
         return render_template("login.html")
         
-@app.route("/search", methods=['GET', 'POST']
+@app.route("/search", methods=['GET', 'POST'])
 def search():
     if session['id'] == -1:
         return redirect(url_for("home"))

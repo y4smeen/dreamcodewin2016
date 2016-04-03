@@ -1,6 +1,6 @@
 /* CSS Stylesheet */
 
-.home {
+body.home {
 	background-color: black;
 	background: url(photo2.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
@@ -9,7 +9,7 @@
     background-size: cover;
 }
 
-.bg2 {
+body.bg2 {
 	background-color: black;
 	background: url(photo1.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
@@ -19,7 +19,7 @@
 }
 
 .jumbotron{
-    background-color: transparent; !important;
+    background-color:transparent; !important;
     position: absolute;
     left: 50%;
     top: 50%;
