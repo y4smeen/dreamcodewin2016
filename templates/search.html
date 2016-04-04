@@ -1,0 +1,29 @@
+{% extends "base2.html" %}
+
+{% block contents %}
+<div class="container">
+    <h1 class="center">Search</h1>
+    
+    <div class="col-lg-6">
+	<div class="input-group searchpos">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+        	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
+      </span>
+    </div>
+</div>
+
+
+<center>
+<h1>Search</h1>
+<form method = "POST">
+  <input type="text" name="searchTerm" placeholder="42nd president">
+  <p/>
+  <input type="submit" name="button" value="search">
+</form>
+
+
+
+{% endblock %}

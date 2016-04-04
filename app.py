@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import database, os
 import explore
+import google
 app = Flask(__name__)
+
 
 def getSources(): #Putting all Outside Sources into list 'srcs'
     srcs = []
@@ -16,6 +18,7 @@ def getSources(): #Putting all Outside Sources into list 'srcs'
         srcs.append(line)
     return srcs
 srcs = getSources()
+
 
 @app.route("/")
 @app.route("/home")
@@ -65,7 +68,20 @@ def search():
         return redirect(url_for("home"))
     if request.method == 'POST':
         q = request.form["searchTerm"]
-        return explore.googleSearch(q)
+        if q:
+            print q
+            l = []
+            results = google.search(q,num=20,start=0,stop=1)
+            for url in results:
+                for src in srcs:
+                    if url.find(src)!=-1:
+                        l.append(url)
+            message = ""
+            if (len(l)<2):
+                message = "Timed Out: More results would take too long"
+            return render_template("results.html", links=l, message=message)
+        # result = explore.searchAll(request.form["searchTerm"]
+        #return explore.googleSearch(q)
     else:
         return render_template("search.html")
 
