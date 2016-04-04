@@ -10,6 +10,28 @@
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   </head>
 
-    {% block contents %}<body></body>{% endblock %}
+<body>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div>
+	<ul class="nav navbar-nav">
+          <li><a href="/"><b>Home</b></a></li>
+	</ul>
+	
+	<ul class="nav navbar-nav">
+	  <li><a href="/search"><b>Search</b></a></li>
+	</ul>
+	
+	<ul class="nav navbar-nav navbar-right">
+          <li><a href="/"><b>Logout</b></a></li>
+	</ul>
+      </div>
+  </nav>
+  
+  <br><br><br>
+  
+      {% block contents %}
+  {% endblock %}
+    </body>
 
 </html>
