@@ -2,7 +2,12 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import database, os
 import explore
 import google
+from oauth2client.tools import argparser
 app = Flask(__name__)
+
+import sys
+reload(sys)  
+sys.setdefaultencoding('Cp1252')
 
 
 def getSources(): #Putting all Outside Sources into list 'srcs'
@@ -67,19 +72,15 @@ def search():
     if session['id'] == -1:
         return redirect(url_for("home"))
     if request.method == 'POST':
-        q = request.form["searchTerm"]
-        if q:
-            print q
-            l = []
-            results = google.search(q,num=20,start=0,stop=1)
-            for url in results:
-                for src in srcs:
-                    if url.find(src)!=-1:
-                        l.append(url)
-            message = ""
-            if (len(l)<2):
-                message = "Timed Out: More results would take too long"
-            return render_template("results.html", links=l, message=message)
+        query = str(request.form["searchTerm"])
+        if query:
+            google = explore.googleSearch(query)
+            youtube = explore.youtubeSearch(query)
+            quizlet = explore.quizletSearch(query)
+            #results = explore.searchAll(query)
+            #print results
+            #return render_template("results.html", results = results)
+            return render_template("results.html", googleResults=google, quizletResults = quizlet, youtubeResults = youtube)
         # result = explore.searchAll(request.form["searchTerm"]
         #return explore.googleSearch(q)
     else:
@@ -103,4 +104,6 @@ if __name__ == "__main__":
     app.debug = True
     app.secret_key = "adashljdoiqdm"
     #app.run('0.0.0.0',port=8000)
+    argparser.add_argument("--q", help="Search term", default="nothing")
+    argparser.add_argument("--max-results", help="Max results", default=10)
     app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
