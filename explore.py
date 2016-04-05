@@ -6,6 +6,8 @@ import google, os
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
+import urllib2
+from bs4 import BeautifulSoup
 
 def quizletSearch(query):
     TEMPLATE = "https://api.quizlet.com/2.0/search/sets?client_id=3GbCW6xc9K&whitespace=1&q=%(query)s"
@@ -14,8 +16,8 @@ def quizletSearch(query):
     result = request.read()
     r = json.loads(result)
     all_sets = []
-    for sets in r["sets"][:5]:
-        all_sets.append(("https://quizlet.com"+sets["url"]).encode("utf8"))
+    for sets in r["sets"][:10]:
+        all_sets.append([sets["title"],("https://quizlet.com"+sets["url"]).encode("utf8")])
     return all_sets
 
 def youtubeSearch(query):
@@ -32,8 +34,7 @@ def youtubeSearch(query):
     counter = 0
     for search_result in search_response.get("items", []):
         if search_result["id"]["kind"] == "youtube#video":
-            videos.append([search_result["snippet"]["title"].encode("utf8"),(search_result["id"]["videoId"]).encode("utf8"), "player"+str(counter)])
-            #, search_result["snippet"]["thumbnails"]["default"]['url']])
+            videos.append([search_result["snippet"]["title"].encode("utf8"),("https://www.youtube.com/embed/"+search_result["id"]["videoId"]).encode("utf8"), "player"+str(counter)])
         counter+=1
     return videos
 
@@ -54,36 +55,13 @@ def googleSearch(query):
     l = []
     srcs = getSources()
     results = google.search(query,num=30,start=0,stop=1)
+    counter = 0
     for url in results:
+        if counter > 8:
+            break
         for src in srcs:
             if url.find(src)!=-1:
-                l.append((url).encode("utf8"))
-        #message = ""
-        #    if (len(l)<2):
-        #        message = "Timed Out: More results would take too long"
+                counter += 1
+                soup = BeautifulSoup(urllib2.urlopen(url), "html5lib")
+                l.append([soup.title.string, (url).encode("utf8")])
     return l
-
-def searchAll(query):
-    quizlet = quizletSearch(query)
-    youtube = youtubeSearch(query)
-    google = googleSearch(query)
-    
-    results = []
-    count = 0
-    while (count < 10):
-        try:
-            results.append(quizlet[count])
-        except:
-            print "Out of Quizlet"
-        try:
-            results.append(youtube[count])
-        except:
-            print "Out of Youtube"
-        try:
-            results.append(google[count])
-        except:
-            print "Out of Google"
-        count += 1
-    return results
-    
-#print searchAll("biology")
