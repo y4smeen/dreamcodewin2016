@@ -81,10 +81,13 @@ def search():
             #print results
             #return render_template("results.html", results = results)
             return render_template("results.html", googleResults=google, quizletResults = quizlet, youtubeResults = youtube)
+            #return redirect(url_for("results", googleResults=google, quizletResults = quizlet, youtubeResults = youtube))
+            
+        
         # result = explore.searchAll(request.form["searchTerm"]
         #return explore.googleSearch(q)
     else:
-        return render_template("search.html")
+        return render_template("search.html") # javascript:void(0) #what is this here???????
 
 @app.route("/study")
 def study():

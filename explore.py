@@ -14,8 +14,8 @@ def quizletSearch(query):
     result = request.read()
     r = json.loads(result)
     all_sets = []
-    for sets in r["sets"]:
-        all_sets.append("https://quizlet.com"+sets["url"])
+    for sets in r["sets"][:5]:
+        all_sets.append(("https://quizlet.com"+sets["url"]).encode("utf8"))
     return all_sets
 
 def youtubeSearch(query):
@@ -27,12 +27,14 @@ def youtubeSearch(query):
     options = args
     
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
-    search_response = youtube.search().list(q=query,part="id,snippet", maxResults=25).execute()
+    search_response = youtube.search().list(q=query,part="id,snippet", maxResults=5).execute()
     videos = []
+    counter = 0
     for search_result in search_response.get("items", []):
         if search_result["id"]["kind"] == "youtube#video":
-            videos.append([search_result["snippet"]["title"].encode("utf8"),("https://www.youtube.com/watch?v=" + search_result["id"]["videoId"]).encode("utf8")])
+            videos.append([search_result["snippet"]["title"].encode("utf8"),(search_result["id"]["videoId"]).encode("utf8"), "player"+str(counter)])
             #, search_result["snippet"]["thumbnails"]["default"]['url']])
+        counter+=1
     return videos
 
 def getSources(): #Putting all Outside Sources into list 'srcs'
@@ -55,7 +57,7 @@ def googleSearch(query):
     for url in results:
         for src in srcs:
             if url.find(src)!=-1:
-                l.append(url)
+                l.append((url).encode("utf8"))
         #message = ""
         #    if (len(l)<2):
         #        message = "Timed Out: More results would take too long"
